@@ -1,43 +1,43 @@
 import React from "react";
 import tw from "twin.macro"
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 
 const Header = styled.header`
-    ${tw`w-full`}
+    ${tw`w-full`};
 `;
 
 const List = styled.ul`
-    ${tw`font-bold text-lg flex bg-gradient-to-b from-blue-900 to-blue-800`}
+    ${tw`font-bold text-lg flex bg-gradient-to-b from-gray-900 to-gray-800`};
 `
 
 const Item = styled.li`
-    ${tw`text-center text-gray-50 hover:bg-gray-50 hover:text-blue-900`}
+    ${props => props.current ?
+        tw`text-center text-gray-50 hover:text-yellow-400 transition delay-75 text-yellow-400 border-b-4 ease-in-out border-yellow-400` :
+        tw`text-center text-gray-50 hover:text-yellow-400`
+    };
 `;
 
 const SLink = styled(Link)`
-    ${tw`border-b-4 w-40 p-3 block`}
+    ${tw`p-3 w-40 block`};
 `;
 
 //
-function header() {
-
-    return (
-        <Header>
-            <List>
-                <Item current={false} >
-                    <SLink to="/">Movies</SLink>
-                </Item>
-                <Item current={false} >
-                    <SLink to="/tv">TV</SLink>
-                </Item>
-                <Item current={false} >
-                    <SLink to="/search">Search</SLink>
-                </Item>
-            </List>
-        </Header>
-    )
-}
-
-export default header
+const View = ({ location: { pathname } }) => (
+    <Header>
+        <List>
+            <Item current={pathname === "/"} >
+                <SLink to="/">Movies</SLink>
+            </Item>
+            <Item current={pathname === "/tv"} >
+                <SLink to="/tv">TV</SLink>
+            </Item>
+            <Item current={pathname === "/search"} >
+                <SLink to="/search">Search</SLink>
+            </Item>
+        </List>
+    </Header>
+)
+//withRouter 경로 링킹값 확인 가능
+export default withRouter(View)
