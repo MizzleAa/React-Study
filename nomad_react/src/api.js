@@ -16,7 +16,7 @@ export const moviesApi = {
     upcoming: () => api.get("movie/upcoming"),
     nowPlaying: () => api.get("movie/now_playing"),
     popular: () => api.get("movie/popular"),
-    movieById: id => api.get(`movie/${id}`, {
+    movieDetail: id => api.get(`movie/${id}`, {
         params: {
             append_to_response:"videos"
         }
@@ -29,6 +29,9 @@ export const moviesApi = {
 }
 
 export const tvsApi = {
+    //https://api.themoviedb.org/3/tv/top_rated?api_key=165ef33c3cb947772becf27a6d03d4d1&language=en-US
+    //https://api.themoviedb.org/3/tv/popular?api_key=165ef33c3cb947772becf27a6d03d4d1&language=en-US
+            
     topRated: () => api.get("tv/top_rated"),
     popular: () => api.get("tv/popular"),
     airingToday: () => api.get("tv/airing_today"),
